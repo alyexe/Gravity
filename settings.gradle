@@ -1,0 +1,4 @@
+rootProject.name='Gravity'
+include ':app'
+include ':myframework'
+include ':myframework'
