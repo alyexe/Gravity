@@ -1,11 +1,10 @@
-package com.github.alyexe.gravity.classes;
+package com.github.alyexe.myframework;
 
 import android.graphics.Bitmap;
-import com.github.alyexe.myframework.GraphicsFW;
 
 import java.util.List;
 
-public class GameAnimation {
+public class AnimationFW {
     private double animationSpeed;
     private int indexDelay;
     private int framesCount;
@@ -14,7 +13,7 @@ public class GameAnimation {
     private Bitmap sprite;
     private List<Bitmap> sprites;
 
-    public GameAnimation(double animationSpeed, List<Bitmap> sprites) {
+    public AnimationFW(double animationSpeed, List<Bitmap> sprites) {
         this.sprite = sprites.get(0);
         this.animationSpeed = animationSpeed;
         this.sprites = sprites;
@@ -27,12 +26,10 @@ public class GameAnimation {
         if (framesCount < sprites.size()) {
             sprite = sprites.get(framesCount);
             framesCount++;
-        }
+        } else framesCount = 0;
     }
 
     public void drawingAnimation(GraphicsFW graphicsFW, int x, int y) {
         graphicsFW.drawTexture(sprite, x, y);
     }
 }
-
-//TODO Этот класс можно перенести в фпеймворк. Подумать как.

@@ -19,9 +19,9 @@ public class BackgroundGenerator {
         }
     }
 
-    public void update() {
+    public void update(double playerSpeed) {
         for (Star s : starList) {
-            s.update();
+            s.update(playerSpeed);
         }
     }
 

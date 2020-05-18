@@ -14,13 +14,11 @@ public class GameScene extends SceneFW {
     }
 
     GameState gameState;
-    BackgroundGenerator backgroundGenerator;
     GameManager gameManager;
 
     public GameScene(CoreFW coreFW) {
         super(coreFW);
         gameState = GameState.READY;
-        backgroundGenerator = new BackgroundGenerator(sceneWidth, sceneHeight);
         gameManager = new GameManager(coreFW, sceneWidth, sceneHeight);
     }
 
@@ -77,12 +75,10 @@ public class GameScene extends SceneFW {
     private void drawingStateRunning() {
         graphicsFW.clearScene(Color.BLACK);
         graphicsFW.drawText("Game scene", 250, 300, Color.WHITE, 60, null);
-        backgroundGenerator.drawing(graphicsFW);
         gameManager.drawing(coreFW, graphicsFW);
     }
 
     private void updateStateRunning() {
-        backgroundGenerator.update();
         gameManager.update();
     }
 

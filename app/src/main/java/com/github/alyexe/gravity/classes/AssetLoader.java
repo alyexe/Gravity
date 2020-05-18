@@ -2,7 +2,9 @@ package com.github.alyexe.gravity.classes;
 
 import com.github.alyexe.myframework.CoreFW;
 import com.github.alyexe.myframework.GraphicsFW;
-import com.github.alyexe.myframework.utilites.UtilResourceFW;
+import com.github.alyexe.gravity.utilites.UtilResource;
+
+import java.util.ArrayList;
 
 public class AssetLoader {
     public AssetLoader(CoreFW coreFW, GraphicsFW graphicsFW) {
@@ -11,13 +13,48 @@ public class AssetLoader {
     }
 
     private void loadSpriteLayer(GraphicsFW graphicsFW) {
-        UtilResourceFW.playerSprite.add(graphicsFW.newSprite(UtilResourceFW.textureAtlas, 0, 0, 64, 64));
-        UtilResourceFW.playerSprite.add(graphicsFW.newSprite(UtilResourceFW.textureAtlas, 64, 0, 64, 64));
-        UtilResourceFW.playerSprite.add(graphicsFW.newSprite(UtilResourceFW.textureAtlas, 128, 0, 64, 64));
-        UtilResourceFW.playerSprite.add(graphicsFW.newSprite(UtilResourceFW.textureAtlas, 192, 0, 64, 64));
-    }
+        UtilResource.playerSprite = new ArrayList<>();
+        UtilResource.playerBoostSprite = new ArrayList<>();
+
+        int count = 0;
+        UtilResource.playerSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 0, 64, 64));
+        UtilResource.playerSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 0, 64, 64));
+        UtilResource.playerSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 0, 64, 64));
+        UtilResource.playerSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 0, 64, 64));
+        UtilResource.playerSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 0, 64, 64));
+        UtilResource.playerSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 0, 64, 64));
+        UtilResource.playerSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 0, 64, 64));
+        UtilResource.playerSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 0, 64, 64));
+        count = 0;
+        UtilResource.playerSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 64, 64, 64));
+        UtilResource.playerSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 64, 64, 64));
+        UtilResource.playerSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 64, 64, 64));
+        UtilResource.playerSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 64, 64, 64));
+        UtilResource.playerSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 64, 64, 64));
+        UtilResource.playerSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 64, 64, 64));
+        UtilResource.playerSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 64, 64, 64));
+        UtilResource.playerSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 64, 64, 64));
+
+        count = 0;
+        UtilResource.playerBoostSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 128, 64, 64));
+        UtilResource.playerBoostSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 128, 64, 64));
+        UtilResource.playerBoostSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 128, 64, 64));
+        UtilResource.playerBoostSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 128, 64, 64));
+        UtilResource.playerBoostSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 128, 64, 64));
+        UtilResource.playerBoostSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 128, 64, 64));
+        UtilResource.playerBoostSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 128, 64, 64));
+        UtilResource.playerBoostSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 128, 64, 64));
+        count = 0;
+        UtilResource.playerBoostSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 192, 64, 64));
+        UtilResource.playerBoostSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 192, 64, 64));
+        UtilResource.playerBoostSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 192, 64, 64));
+        UtilResource.playerBoostSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 192, 64, 64));
+        UtilResource.playerBoostSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 192, 64, 64));
+        UtilResource.playerBoostSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 192, 64, 64));
+        UtilResource.playerBoostSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 192, 64, 64));
+        UtilResource.playerBoostSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 192, 64, 64));   }
 
     private void loadTexture(GraphicsFW graphicsFW) {
-        UtilResourceFW.textureAtlas = graphicsFW.newTexture("texture_atlas.png");
+        UtilResource.textureAtlas = graphicsFW.newTexture("texture_atlas.png");
     }
 }
