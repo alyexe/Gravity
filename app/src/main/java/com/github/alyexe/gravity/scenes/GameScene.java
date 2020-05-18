@@ -2,6 +2,7 @@ package com.github.alyexe.gravity.scenes;
 
 import android.graphics.Color;
 import com.github.alyexe.gravity.R;
+import com.github.alyexe.gravity.classes.GameManager;
 import com.github.alyexe.gravity.generators.BackgroundGenerator;
 import com.github.alyexe.myframework.CoreFW;
 import com.github.alyexe.myframework.SceneFW;
@@ -14,11 +15,13 @@ public class GameScene extends SceneFW {
 
     GameState gameState;
     BackgroundGenerator backgroundGenerator;
+    GameManager gameManager;
 
     public GameScene(CoreFW coreFW) {
         super(coreFW);
         gameState = GameState.READY;
         backgroundGenerator = new BackgroundGenerator(sceneWidth, sceneHeight);
+        gameManager = new GameManager(coreFW, sceneWidth, sceneHeight);
     }
 
     @Override
@@ -75,10 +78,12 @@ public class GameScene extends SceneFW {
         graphicsFW.clearScene(Color.BLACK);
         graphicsFW.drawText("Game scene", 250, 300, Color.WHITE, 60, null);
         backgroundGenerator.drawing(graphicsFW);
+        gameManager.drawing(coreFW, graphicsFW);
     }
 
     private void updateStateRunning() {
         backgroundGenerator.update();
+        gameManager.update();
     }
 
     private void drawingStateReady() {

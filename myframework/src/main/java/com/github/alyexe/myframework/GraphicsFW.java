@@ -74,4 +74,9 @@ public class GraphicsFW {
         }
         return textureGame;
     }
+
+    public Bitmap newSprite(Bitmap textureAtlas, int x, int y, int spriteWidth, int spriteHeight) {
+        Bitmap newSprite = Bitmap.createBitmap(textureAtlas, x, y, spriteWidth, spriteHeight);
+        return newSprite;
+    }
 }
