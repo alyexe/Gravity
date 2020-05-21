@@ -21,8 +21,8 @@ public class Enemy extends ObjectFW {
         radius = UtilResource.enemySprite.get(0).getWidth()/4;
         switch (enemyType) {
             case 1:
-                speed = UtilRandomFW.getGap(2, 5);
-                enemyAnimation = new AnimationFW(3, UtilResource.enemySprite);
+                speed = UtilRandomFW.getGap(2, 6);
+                enemyAnimation = new AnimationFW(speed, UtilResource.enemySprite);
                 break;
             case 2:
                 speed = UtilRandomFW.getGap(4, 9);

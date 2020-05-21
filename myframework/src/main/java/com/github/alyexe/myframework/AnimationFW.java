@@ -1,6 +1,7 @@
 package com.github.alyexe.myframework;
 
 import android.graphics.Bitmap;
+import com.github.alyexe.myframework.utilites.UtilRandomFW;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class AnimationFW {
     private List<Bitmap> sprites;
 
     public AnimationFW(double animationSpeed, List<Bitmap> sprites) {
-        this.sprite = sprites.get(0);
+        this.sprite = sprites.get(UtilRandomFW.getGap(0, sprites.size() - 1));
         this.animationSpeed = animationSpeed;
         this.sprites = sprites;
         this.framesCount = 0;

@@ -1,36 +1,40 @@
 package com.github.alyexe.gravity.objects;
 
 import android.graphics.Rect;
+import com.github.alyexe.gravity.utilites.UtilResource;
 import com.github.alyexe.myframework.AnimationFW;
 import com.github.alyexe.myframework.CoreFW;
 import com.github.alyexe.myframework.GraphicsFW;
 import com.github.alyexe.myframework.ObjectFW;
-import com.github.alyexe.gravity.utilites.UtilResource;
+import com.github.alyexe.myframework.utilites.UtilTimerDelay;
 
 public class MainPlayer extends ObjectFW {
     private final int GRAVITY = -3;
     private final int MAX_SPEED = 15;
     private final int MIN_SPEED = 1;
-    private boolean boosting;
-    private int playerShields;
-    private CoreFW coreFW;
-
     AnimationFW mainPlayerAnimation;
     AnimationFW mainPlayerBoostAnimation;
+    UtilTimerDelay onShieldHit;
+    private boolean boosting;
+    private boolean enemyHit;
+    private int playerShields;
+    private CoreFW coreFW;
 
     public MainPlayer(CoreFW coreFW, int maxScreenX, int maxScreenY, int minScreenY) {
         x = 20;
         y = 200;
-        radius = UtilResource.playerSprite.get(0).getWidth()/4;
+        radius = UtilResource.playerSprite.get(0).getWidth() / 4;
         speed = 3;
         playerShields = 3;
         this.boosting = false;
+        this.enemyHit = false;
         this.coreFW = coreFW;
         this.maxScreenX = maxScreenX;
         this.maxScreenY = maxScreenY - UtilResource.playerSprite.get(0).getHeight();
         this.minScreenY = minScreenY;
         mainPlayerAnimation = new AnimationFW(speed, UtilResource.playerSprite);
         mainPlayerBoostAnimation = new AnimationFW(speed, UtilResource.playerBoostSprite);
+        onShieldHit = new UtilTimerDelay();
     }
 
     public void update() {
@@ -43,7 +47,7 @@ public class MainPlayer extends ObjectFW {
         }
 
         if (boosting) {
-            speed += 0.1;
+            speed += 0.2;
         } else speed -= 3;
 
         if (speed > MAX_SPEED) speed = MAX_SPEED;
@@ -68,9 +72,16 @@ public class MainPlayer extends ObjectFW {
     }
 
     public void drawing(GraphicsFW graphicsFW) {
-        if (boosting) {
-            mainPlayerBoostAnimation.drawingAnimation(graphicsFW, x, y);
-        } else mainPlayerAnimation.drawingAnimation(graphicsFW, x, y);
+        if (!enemyHit) {
+            if (boosting) {
+                mainPlayerBoostAnimation.drawingAnimation(graphicsFW, x, y);
+            } else mainPlayerAnimation.drawingAnimation(graphicsFW, x, y);
+        } else {
+            graphicsFW.drawTexture(UtilResource.shieldHitEnemy, x, y);
+            if (onShieldHit.timerDelay(1)) {
+                enemyHit = false;
+            } else enemyHit = true;
+        }
     }
 
     public int getPlayerShields() {
@@ -83,5 +94,7 @@ public class MainPlayer extends ObjectFW {
 
     public void hitEnemy() {
         playerShields--;
+        enemyHit = true;
+        onShieldHit.startTimer();
     }
 }
