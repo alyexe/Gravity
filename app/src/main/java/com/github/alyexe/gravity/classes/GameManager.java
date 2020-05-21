@@ -15,6 +15,11 @@ public class GameManager {
     private int minScreenX;
     private int minScreenY;
     private int passedDistance;
+
+    public int getPassedDistance() {
+        return passedDistance;
+    }
+
     private int currentPlayerSpeed;
     private int currentPlayerShields;
     public static boolean gameOver;

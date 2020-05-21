@@ -8,10 +8,6 @@ import com.github.alyexe.myframework.SceneFW;
 
 public class GameScene extends SceneFW {
 
-    enum GameState {
-        READY, RUNNING, PAUSE, GAMEOVER
-    }
-
     GameState gameState;
     GameManager gameManager;
 
@@ -32,8 +28,8 @@ public class GameScene extends SceneFW {
         if (gameState == GameState.PAUSE) {
             updateStatePause();
         }
-        if (gameState == GameState.GAMEOVER) {
-            updateStateGameover();
+        if (gameState == GameState.GAME_OVER) {
+            updateStateGameOver();
         }
     }
 
@@ -50,19 +46,27 @@ public class GameScene extends SceneFW {
         if (gameState == GameState.PAUSE) {
             drawingStatePause();
         }
-        if (gameState == GameState.GAMEOVER) {
-            drawingStateGameover();
+        if (gameState == GameState.GAME_OVER) {
+            drawingStateGameOver();
         }
     }
 
-    private void drawingStateGameover() {
+    private void drawingStateGameOver() {
         graphicsFW.clearScene(Color.BLACK);
-        graphicsFW.drawText("GAME OVER!", 250, 300, Color.WHITE, 60, null);
+        graphicsFW.drawText(coreFW.getString(R.string.txt_gameScene_stateGameOver_distance) + ": " + gameManager.getPassedDistance(), 250, 200, Color.WHITE, 30, null);
+        graphicsFW.drawText(coreFW.getString(R.string.txt_gameScene_stateGameOver_gameOver), 250, 300, Color.WHITE, 60, null);
+        graphicsFW.drawText(coreFW.getString(R.string.txt_gameScene_stateGameOver_restart), 250, 360, Color.WHITE, 30, null);
+        graphicsFW.drawText(coreFW.getString(R.string.txt_gameScene_stateGameOver_exit), 250, 420, Color.WHITE, 30, null);
     }
 
-    private void updateStateGameover() {
+    private void updateStateGameOver() {
+        if (coreFW.getTouchListenerFW().getTouchUp(250, 360, 100, 35)) {
+            coreFW.setSceneFW(new GameScene(coreFW));
+        }
 
-    }
+        if (coreFW.getTouchListenerFW().getTouchUp(250, 420, 100, 35)) {
+            coreFW.setSceneFW(new MainMenuScene(coreFW));
+        }    }
 
     private void drawingStatePause() {
 
@@ -74,21 +78,20 @@ public class GameScene extends SceneFW {
 
     private void drawingStateRunning() {
         graphicsFW.clearScene(Color.BLACK);
-        graphicsFW.drawText("Game scene", 250, 300, Color.WHITE, 60, null);
+//        graphicsFW.drawText("Game scene", 250, 300, Color.WHITE, 60, null);
         gameManager.drawing(coreFW, graphicsFW);
     }
 
     private void updateStateRunning() {
         gameManager.update();
         if (GameManager.gameOver) {
-            gameState = GameState.GAMEOVER;
+            gameState = GameState.GAME_OVER;
         }
     }
 
     private void drawingStateReady() {
         graphicsFW.clearScene(Color.BLACK);
-        graphicsFW.drawText(coreFW.getString(R.string.txt_gameScene_stateReady_ready),
-                250, 300, Color.WHITE, 60, null);
+        graphicsFW.drawText(coreFW.getString(R.string.txt_gameScene_stateReady_ready), 250, 300, Color.WHITE, 60, null);
     }
 
     private void updateStateReady() {
@@ -110,5 +113,9 @@ public class GameScene extends SceneFW {
     @Override
     public void dispose() {
 
+    }
+
+    enum GameState {
+        READY, RUNNING, PAUSE, GAME_OVER
     }
 }
