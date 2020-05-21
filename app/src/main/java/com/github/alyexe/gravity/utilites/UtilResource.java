@@ -11,4 +11,5 @@ public class UtilResource {
     public static List<Bitmap> playerBoostSprite;
     public static List<Bitmap> enemySprite;
     public static Bitmap shieldHitEnemy;
+    public static List<Bitmap> playerExplodeSprite;
 }

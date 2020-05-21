@@ -1,6 +1,7 @@
 package com.github.alyexe.gravity.objects;
 
 import android.graphics.Rect;
+import com.github.alyexe.gravity.classes.GameManager;
 import com.github.alyexe.gravity.utilites.UtilResource;
 import com.github.alyexe.myframework.AnimationFW;
 import com.github.alyexe.myframework.CoreFW;
@@ -14,9 +15,12 @@ public class MainPlayer extends ObjectFW {
     private final int MIN_SPEED = 1;
     AnimationFW mainPlayerAnimation;
     AnimationFW mainPlayerBoostAnimation;
-    UtilTimerDelay onShieldHit;
+    AnimationFW mainPlayerExplosionAnimation;
+    UtilTimerDelay onShieldHitTimer;
+    UtilTimerDelay onGameOverTimer;
     private boolean boosting;
     private boolean enemyHit;
+    private boolean isGameOver;
     private int playerShields;
     private CoreFW coreFW;
 
@@ -28,13 +32,16 @@ public class MainPlayer extends ObjectFW {
         playerShields = 3;
         this.boosting = false;
         this.enemyHit = false;
+        this.isGameOver = false;
         this.coreFW = coreFW;
         this.maxScreenX = maxScreenX;
         this.maxScreenY = maxScreenY - UtilResource.playerSprite.get(0).getHeight();
         this.minScreenY = minScreenY;
         mainPlayerAnimation = new AnimationFW(speed, UtilResource.playerSprite);
         mainPlayerBoostAnimation = new AnimationFW(speed, UtilResource.playerBoostSprite);
-        onShieldHit = new UtilTimerDelay();
+        mainPlayerExplosionAnimation = new AnimationFW(speed, UtilResource.playerExplodeSprite);
+        onShieldHitTimer = new UtilTimerDelay();
+        onGameOverTimer = new UtilTimerDelay();
     }
 
     public void update() {
@@ -61,6 +68,10 @@ public class MainPlayer extends ObjectFW {
         } else mainPlayerAnimation.runAnimation();
 
         hitBox = new Rect(x, y, UtilResource.enemySprite.get(0).getWidth(), UtilResource.playerSprite.get(0).getHeight());
+
+        if (isGameOver) {
+            mainPlayerExplosionAnimation.runAnimation();
+        }
     }
 
     private void stopBoosting() {
@@ -72,15 +83,22 @@ public class MainPlayer extends ObjectFW {
     }
 
     public void drawing(GraphicsFW graphicsFW) {
-        if (!enemyHit) {
-            if (boosting) {
-                mainPlayerBoostAnimation.drawingAnimation(graphicsFW, x, y);
-            } else mainPlayerAnimation.drawingAnimation(graphicsFW, x, y);
+        if (!isGameOver) {
+            if (!enemyHit) {
+                if (boosting) {
+                    mainPlayerBoostAnimation.drawingAnimation(graphicsFW, x, y);
+                } else mainPlayerAnimation.drawingAnimation(graphicsFW, x, y);
+            } else {
+                graphicsFW.drawTexture(UtilResource.shieldHitEnemy, x, y);
+                if (onShieldHitTimer.timerDelay(1)) {
+                    enemyHit = false;
+                } else enemyHit = true;
+            }
         } else {
-            graphicsFW.drawTexture(UtilResource.shieldHitEnemy, x, y);
-            if (onShieldHit.timerDelay(1)) {
-                enemyHit = false;
-            } else enemyHit = true;
+            mainPlayerExplosionAnimation.drawingAnimation(graphicsFW, x, y);
+            if (onGameOverTimer.timerDelay(1)) {
+                GameManager.gameOver = true;
+            }
         }
     }
 
@@ -94,7 +112,11 @@ public class MainPlayer extends ObjectFW {
 
     public void hitEnemy() {
         playerShields--;
+        if (playerShields < 0) {
+            isGameOver = true;
+            onGameOverTimer.startTimer();
+        }
         enemyHit = true;
-        onShieldHit.startTimer();
+        onShieldHitTimer.startTimer();
     }
 }

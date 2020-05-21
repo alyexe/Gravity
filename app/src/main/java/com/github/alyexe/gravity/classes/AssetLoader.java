@@ -32,6 +32,7 @@ public class AssetLoader {
     private void loadSpriteLayer(GraphicsFW graphicsFW) {
         UtilResource.playerSprite = new ArrayList<>();
         UtilResource.playerBoostSprite = new ArrayList<>();
+        UtilResource.playerExplodeSprite = new ArrayList<>();
 
         //Rocket
         int count = 0;
@@ -46,6 +47,13 @@ public class AssetLoader {
         UtilResource.playerBoostSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 64, 64, 64));
         UtilResource.playerBoostSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 64, 64, 64));
         UtilResource.playerBoostSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 64, 64, 64));
+
+        //Explode rocket
+        count = 4;
+        UtilResource.playerExplodeSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 4 * 64, 64, 64));
+        UtilResource.playerExplodeSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 4 * 64, 64, 64));
+        UtilResource.playerExplodeSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 4 * 64, 64, 64));
+        UtilResource.playerExplodeSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 4 * 64, 64, 64));
     }
 
     private void loadTexture(GraphicsFW graphicsFW) {

@@ -17,6 +17,7 @@ public class GameManager {
     private int passedDistance;
     private int currentPlayerSpeed;
     private int currentPlayerShields;
+    public static boolean gameOver;
 
     MainPlayer mainPlayer;
     BackgroundGenerator backgroundGenerator;
@@ -32,6 +33,7 @@ public class GameManager {
         this.mainPlayer = new MainPlayer(coreFW, maxScreenX, maxScreenY, minScreenY);
         backgroundGenerator = new BackgroundGenerator(sceneWidth, sceneHeight, minScreenY);
         enemyGenerator = new EnemyGenerator(sceneWidth, sceneHeight, minScreenY);
+        gameOver = false;
 
     }
 
