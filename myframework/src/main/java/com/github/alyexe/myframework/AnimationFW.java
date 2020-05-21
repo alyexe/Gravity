@@ -23,6 +23,13 @@ public class AnimationFW {
 
     public void runAnimation() {
         indexDelay++;
+        if (indexDelay > animationSpeed) {
+            indexDelay = 0;
+            nextFrame();
+        }
+    }
+
+    private void nextFrame() {
         if (framesCount < sprites.size()) {
             sprite = sprites.get(framesCount);
             framesCount++;

@@ -19,7 +19,7 @@ public class MainPlayer extends ObjectFW {
     public MainPlayer(CoreFW coreFW, int maxScreenX, int maxScreenY, int minScreenY) {
         x = 20;
         y = 200;
-        speed = 1;
+        speed = 3;
         this.boosting = false;
         this.coreFW = coreFW;
         this.maxScreenX = maxScreenX;
