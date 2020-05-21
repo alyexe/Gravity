@@ -11,10 +11,10 @@ public class BackgroundGenerator {
 
     List<Star> starList = new ArrayList<>();
 
-    public BackgroundGenerator(int sceneWidth, int sceneHeight) {
+    public BackgroundGenerator(int sceneWidth, int sceneHeight, int minScreenY) {
         int starsPeak = 50;
         for (int i = 0; i < starsPeak; i++) {
-            Star star = new Star(sceneWidth, sceneHeight);
+            Star star = new Star(sceneWidth, sceneHeight, minScreenY);
             starList.add(star);
         }
     }

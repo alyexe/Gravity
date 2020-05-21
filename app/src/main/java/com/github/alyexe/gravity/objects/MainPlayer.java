@@ -11,6 +11,7 @@ public class MainPlayer extends ObjectFW {
     private final int MAX_SPEED = 15;
     private final int MIN_SPEED = 1;
     private boolean boosting;
+    private int playerShields;
     private CoreFW coreFW;
 
     AnimationFW mainPlayerAnimation;
@@ -20,10 +21,12 @@ public class MainPlayer extends ObjectFW {
         x = 20;
         y = 200;
         speed = 3;
+        playerShields = 3;
         this.boosting = false;
         this.coreFW = coreFW;
         this.maxScreenX = maxScreenX;
         this.maxScreenY = maxScreenY - UtilResource.playerSprite.get(0).getHeight();
+        this.minScreenY = minScreenY;
         mainPlayerAnimation = new AnimationFW(speed, UtilResource.playerSprite);
         mainPlayerBoostAnimation = new AnimationFW(speed, UtilResource.playerBoostSprite);
     }
@@ -64,6 +67,10 @@ public class MainPlayer extends ObjectFW {
         if (boosting) {
             mainPlayerBoostAnimation.drawingAnimation(graphicsFW, x, y);
         } else mainPlayerAnimation.drawingAnimation(graphicsFW, x, y);
+    }
+
+    public int getPlayerShields() {
+        return playerShields;
     }
 
     public double getPlayerSpeed() {

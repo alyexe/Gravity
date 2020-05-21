@@ -10,4 +10,9 @@
 
     <!--GameScene-->
     <string name="txt_gameScene_stateReady_ready">READY</string>
+
+    <!--HUD-->
+    <string name="txt_hud_passedDistance">Пройдено</string>
+    <string name="txt_hud_currentPlayerSpeed">Скорость</string>
+    <string name="txt_hud_currentPlayerShields">Защита</string>
 </resources>
