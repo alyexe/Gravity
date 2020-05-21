@@ -12,7 +12,7 @@ public class EnemyGenerator {
     private int minScreenX;
     private int minScreenY;
 
-    private List<Enemy> enemyList;
+    public List<Enemy> enemyList;
 
     public EnemyGenerator(int sceneWidth, int sceneHeight, int minScreenY) {
         this.maxScreenX = sceneWidth;
@@ -42,5 +42,9 @@ public class EnemyGenerator {
             enemyList.add(new Enemy(maxScreenX, maxScreenY, minScreenY, 1));
             enemiesAmount--;
         }
+    }
+
+    public void hitPlayer(Enemy e) {
+        enemyList.remove(e);
     }
 }

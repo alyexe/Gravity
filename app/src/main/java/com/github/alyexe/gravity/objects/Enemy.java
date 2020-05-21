@@ -1,5 +1,6 @@
 package com.github.alyexe.gravity.objects;
 
+import android.graphics.Rect;
 import com.github.alyexe.gravity.utilites.UtilResource;
 import com.github.alyexe.myframework.AnimationFW;
 import com.github.alyexe.myframework.GraphicsFW;
@@ -17,6 +18,7 @@ public class Enemy extends ObjectFW {
         this.minScreenX = 0;
         x = maxScreenX;
         y = UtilRandomFW.getGap(minScreenY, maxScreenY);
+        radius = UtilResource.enemySprite.get(0).getWidth()/4;
         switch (enemyType) {
             case 1:
                 speed = UtilRandomFW.getGap(2, 5);
@@ -35,6 +37,8 @@ public class Enemy extends ObjectFW {
             x = maxScreenX;
             y = UtilRandomFW.getGap(minScreenY, maxScreenY);
         }
+        hitBox = new Rect(x, y, UtilResource.enemySprite.get(0).getWidth(), UtilResource.enemySprite.get(0).getHeight());
+
         enemyAnimation.runAnimation();
     }
 

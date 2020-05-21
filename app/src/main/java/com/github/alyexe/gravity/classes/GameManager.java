@@ -2,8 +2,10 @@ package com.github.alyexe.gravity.classes;
 
 import com.github.alyexe.gravity.generators.BackgroundGenerator;
 import com.github.alyexe.gravity.generators.EnemyGenerator;
+import com.github.alyexe.gravity.objects.Enemy;
 import com.github.alyexe.gravity.objects.Hud;
 import com.github.alyexe.gravity.objects.MainPlayer;
+import com.github.alyexe.myframework.CollisionDetect;
 import com.github.alyexe.myframework.CoreFW;
 import com.github.alyexe.myframework.GraphicsFW;
 
@@ -42,6 +44,17 @@ public class GameManager {
         currentPlayerSpeed = (int)mainPlayer.getPlayerSpeed() * 60;
         currentPlayerShields = mainPlayer.getPlayerShields();
         hud.update(passedDistance, currentPlayerSpeed, currentPlayerShields);
+
+        checkHit();
+    }
+
+    private void checkHit() {
+        for (int i = 0; i < enemyGenerator.enemyList.size(); i++) {
+            if (CollisionDetect.isCollisionDetected(mainPlayer, enemyGenerator.enemyList.get(i))) {
+                mainPlayer.hitEnemy();
+                enemyGenerator.hitPlayer(enemyGenerator.enemyList.get(i));
+            }
+        }
     }
 
     public void drawing(CoreFW coreFW, GraphicsFW graphicsFW) {

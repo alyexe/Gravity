@@ -1,5 +1,6 @@
 package com.github.alyexe.gravity.objects;
 
+import android.graphics.Rect;
 import com.github.alyexe.myframework.AnimationFW;
 import com.github.alyexe.myframework.CoreFW;
 import com.github.alyexe.myframework.GraphicsFW;
@@ -20,6 +21,7 @@ public class MainPlayer extends ObjectFW {
     public MainPlayer(CoreFW coreFW, int maxScreenX, int maxScreenY, int minScreenY) {
         x = 20;
         y = 200;
+        radius = UtilResource.playerSprite.get(0).getWidth()/4;
         speed = 3;
         playerShields = 3;
         this.boosting = false;
@@ -53,6 +55,8 @@ public class MainPlayer extends ObjectFW {
         if (boosting) {
             mainPlayerBoostAnimation.runAnimation();
         } else mainPlayerAnimation.runAnimation();
+
+        hitBox = new Rect(x, y, UtilResource.enemySprite.get(0).getWidth(), UtilResource.playerSprite.get(0).getHeight());
     }
 
     private void stopBoosting() {
@@ -75,5 +79,9 @@ public class MainPlayer extends ObjectFW {
 
     public double getPlayerSpeed() {
         return speed;
+    }
+
+    public void hitEnemy() {
+        playerShields--;
     }
 }
