@@ -1,5 +1,6 @@
 package com.github.alyexe.myframework;
 
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -12,31 +13,38 @@ public class CoreFW extends AppCompatActivity {
 
     private final float FRAME_BUFFER_WIDTH = 800;
     private final float FRAME_BUFFER_HEIGHT = 600;
-
+    private final String SETTINGS = "settings";
     private LoopFW loopFW;
     private GraphicsFW graphicsFW;
     private TouchListenerFW touchListenerFW;
-
     private Display display;
     private Point displaySize;
     private Bitmap frameBuffer;
     private SceneFW sceneFW;
     private float sceneWidth;
     private float sceneHeight;
-
     private boolean stateOnPause;
     private boolean stateOnResume;
+    private SharedPreferences sharedPreferences;
+
+    public CoreFW() {
+    }
+
+    public SharedPreferences getSharedPreferences() {
+        return sharedPreferences;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences = getSharedPreferences(SETTINGS, MODE_PRIVATE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         displaySize = new Point();
         display = getWindowManager().getDefaultDisplay();
         display.getSize(displaySize);
 
-        frameBuffer = Bitmap.createBitmap((int)FRAME_BUFFER_WIDTH, (int)FRAME_BUFFER_HEIGHT, Bitmap.Config.ARGB_8888);
+        frameBuffer = Bitmap.createBitmap((int) FRAME_BUFFER_WIDTH, (int) FRAME_BUFFER_HEIGHT, Bitmap.Config.ARGB_8888);
         sceneWidth = FRAME_BUFFER_WIDTH / displaySize.x;
         sceneHeight = FRAME_BUFFER_HEIGHT / displaySize.y;
 
@@ -49,9 +57,6 @@ public class CoreFW extends AppCompatActivity {
         stateOnPause = false;
         stateOnResume = false;
         setContentView(loopFW);
-    }
-
-    public CoreFW() {
     }
 
     @Override

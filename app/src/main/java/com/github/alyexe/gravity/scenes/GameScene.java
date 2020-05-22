@@ -5,6 +5,7 @@ import com.github.alyexe.gravity.R;
 import com.github.alyexe.gravity.classes.GameManager;
 import com.github.alyexe.myframework.CoreFW;
 import com.github.alyexe.myframework.SceneFW;
+import com.github.alyexe.myframework.utilites.GameSettings;
 
 public class GameScene extends SceneFW {
 
@@ -60,6 +61,7 @@ public class GameScene extends SceneFW {
     }
 
     private void updateStateGameOver() {
+        GameSettings.addDistance(gameManager.getPassedDistance());
         if (coreFW.getTouchListenerFW().getTouchUp(250, 360, 100, 35)) {
             coreFW.setSceneFW(new GameScene(coreFW));
         }
