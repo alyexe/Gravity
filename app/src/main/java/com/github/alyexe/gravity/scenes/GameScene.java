@@ -17,7 +17,7 @@ public class GameScene extends SceneFW {
         super(coreFW);
         gameState = GameState.READY;
         gameManager = new GameManager(coreFW, sceneWidth, sceneHeight);
-        UtilResource.gameMusic.play(true, 1f);
+        UtilResource.gameMusic.play(true, 10f);
     }
 
     @Override
@@ -106,17 +106,17 @@ public class GameScene extends SceneFW {
 
     @Override
     public void pause() {
-
+        UtilResource.gameMusic.stop();
     }
 
     @Override
     public void resume() {
-
+        UtilResource.gameMusic.play(true, 10f);
     }
 
     @Override
     public void dispose() {
-
+        UtilResource.gameMusic.dispose();
     }
 
     enum GameState {
