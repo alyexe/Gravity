@@ -1,4 +1,4 @@
-package com.github.alyexe.myframework.utilites;
+package com.github.alyexe.gravity.utilites;
 
 import android.content.SharedPreferences;
 import com.github.alyexe.myframework.CoreFW;

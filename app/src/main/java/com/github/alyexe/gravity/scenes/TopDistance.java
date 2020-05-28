@@ -4,7 +4,7 @@ import android.graphics.Color;
 import com.github.alyexe.gravity.R;
 import com.github.alyexe.myframework.CoreFW;
 import com.github.alyexe.myframework.SceneFW;
-import com.github.alyexe.myframework.utilites.GameSettings;
+import com.github.alyexe.gravity.utilites.GameSettings;
 
 public class TopDistance extends SceneFW {
 

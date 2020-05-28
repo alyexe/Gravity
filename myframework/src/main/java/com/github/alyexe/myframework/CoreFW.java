@@ -14,9 +14,11 @@ public class CoreFW extends AppCompatActivity {
     private final float FRAME_BUFFER_WIDTH = 800;
     private final float FRAME_BUFFER_HEIGHT = 600;
     private final String SETTINGS = "settings";
+
     private LoopFW loopFW;
     private GraphicsFW graphicsFW;
     private TouchListenerFW touchListenerFW;
+    private AudioFW audioFW;
     private Display display;
     private Point displaySize;
     private Bitmap frameBuffer;
@@ -47,6 +49,7 @@ public class CoreFW extends AppCompatActivity {
         frameBuffer = Bitmap.createBitmap((int) FRAME_BUFFER_WIDTH, (int) FRAME_BUFFER_HEIGHT, Bitmap.Config.ARGB_8888);
         sceneWidth = FRAME_BUFFER_WIDTH / displaySize.x;
         sceneHeight = FRAME_BUFFER_HEIGHT / displaySize.y;
+        audioFW = new AudioFW(this);
 
         loopFW = new LoopFW(this, frameBuffer);
         graphicsFW = new GraphicsFW(getAssets(), frameBuffer);
@@ -102,5 +105,9 @@ public class CoreFW extends AppCompatActivity {
 
     public SceneFW getStartScene() {
         return sceneFW;
+    }
+
+    public AudioFW getAudioFW() {
+        return audioFW;
     }
 }

@@ -3,9 +3,10 @@ package com.github.alyexe.gravity.scenes;
 import android.graphics.Color;
 import com.github.alyexe.gravity.R;
 import com.github.alyexe.gravity.classes.GameManager;
+import com.github.alyexe.gravity.utilites.UtilResource;
 import com.github.alyexe.myframework.CoreFW;
 import com.github.alyexe.myframework.SceneFW;
-import com.github.alyexe.myframework.utilites.GameSettings;
+import com.github.alyexe.gravity.utilites.GameSettings;
 
 public class GameScene extends SceneFW {
 
@@ -16,6 +17,7 @@ public class GameScene extends SceneFW {
         super(coreFW);
         gameState = GameState.READY;
         gameManager = new GameManager(coreFW, sceneWidth, sceneHeight);
+        UtilResource.gameMusic.play(true, 1f);
     }
 
     @Override

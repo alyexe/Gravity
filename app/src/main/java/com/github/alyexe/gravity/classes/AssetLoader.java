@@ -12,6 +12,11 @@ public class AssetLoader {
         loadSpriteLayer(graphicsFW);
         loadEnemySprite(graphicsFW);
         loadOther(graphicsFW);
+        loadAudio(coreFW);
+    }
+
+    private void loadAudio(CoreFW coreFW) {
+        UtilResource.gameMusic = coreFW.getAudioFW().newMusic("title.mp3");
     }
 
     private void loadOther(GraphicsFW graphicsFW) {
