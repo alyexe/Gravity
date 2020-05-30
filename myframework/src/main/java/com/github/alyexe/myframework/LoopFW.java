@@ -1,6 +1,5 @@
 package com.github.alyexe.myframework;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -56,13 +55,13 @@ public class LoopFW extends SurfaceView implements Runnable{
                 drawingGame();
                 delta--;
             }
-            if (System.currentTimeMillis() - timer > 1000) {
-                Date date = new Date();
-                System.out.println("UPDATES = " + updates + ", DRAWS = " + drawing + " " + date.toString());
-                updates = 0;
-                drawing = 0;
-                timer += 1000;
-            }
+//            if (System.currentTimeMillis() - timer > 1000) {
+//                Date date = new Date();
+//                System.out.println("UPDATES = " + updates + ", DRAWS = " + drawing + " " + date.toString());
+//                updates = 0;
+//                drawing = 0;
+//                timer += 1000;
+//            }
         }
     }
 

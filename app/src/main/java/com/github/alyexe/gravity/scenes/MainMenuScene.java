@@ -2,6 +2,7 @@ package com.github.alyexe.gravity.scenes;
 
 import android.graphics.Color;
 import com.github.alyexe.gravity.R;
+import com.github.alyexe.gravity.utilites.UtilResource;
 import com.github.alyexe.myframework.CoreFW;
 import com.github.alyexe.myframework.SceneFW;
 
@@ -15,10 +16,13 @@ public class MainMenuScene extends SceneFW {
     public void update() {
         if (coreFW.getTouchListenerFW().getTouchUp(20, 300, 250, 50)) {
             coreFW.setSceneFW(new GameScene(coreFW));
+            UtilResource.touch.play(10f);
         }
         if (coreFW.getTouchListenerFW().getTouchUp(20, 400, 250, 50)) {
             coreFW.setSceneFW(new TopDistance(coreFW));
-        }    }
+            UtilResource.touch.play(10f);
+        }
+    }
 
     @Override
     public void drawing() {

@@ -5,6 +5,7 @@ import com.github.alyexe.gravity.generators.EnemyGenerator;
 import com.github.alyexe.gravity.objects.Enemy;
 import com.github.alyexe.gravity.objects.Hud;
 import com.github.alyexe.gravity.objects.MainPlayer;
+import com.github.alyexe.gravity.utilites.UtilResource;
 import com.github.alyexe.myframework.CollisionDetect;
 import com.github.alyexe.myframework.CoreFW;
 import com.github.alyexe.myframework.GraphicsFW;
@@ -58,6 +59,7 @@ public class GameManager {
     private void checkHit() {
         for (int i = 0; i < enemyGenerator.enemyList.size(); i++) {
             if (CollisionDetect.isCollisionDetected(mainPlayer, enemyGenerator.enemyList.get(i))) {
+                UtilResource.hit.play(10);
                 mainPlayer.hitEnemy();
                 enemyGenerator.hitPlayer(enemyGenerator.enemyList.get(i));
             }
