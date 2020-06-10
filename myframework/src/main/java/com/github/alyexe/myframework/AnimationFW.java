@@ -6,38 +6,35 @@ import com.github.alyexe.myframework.utilites.UtilRandomFW;
 import java.util.List;
 
 public class AnimationFW {
-    private double animationSpeed;
-    private int indexDelay;
-    private int framesCount;
-//    private int frames;
-
-    private Bitmap sprite;
-    private List<Bitmap> sprites;
+    private final double mAnimationSpeed;
+    private final List<Bitmap> mSprites;
+    private int mIndexDelay;
+    private int mFramesCount;
+    private Bitmap mSprite;
 
     public AnimationFW(double animationSpeed, List<Bitmap> sprites) {
-        this.sprite = sprites.get(UtilRandomFW.getGap(0, sprites.size() - 1));
-        this.animationSpeed = animationSpeed;
-        this.sprites = sprites;
-        this.framesCount = 0;
-//        frames = 4;
+        mSprite = sprites.get(UtilRandomFW.getGap(0, sprites.size() - 1));
+        mAnimationSpeed = animationSpeed;
+        mSprites = sprites;
+        mFramesCount = 0;
     }
 
     public void runAnimation() {
-        indexDelay++;
-        if (indexDelay > animationSpeed) {
-            indexDelay = 0;
+        mIndexDelay++;
+        if (mIndexDelay > mAnimationSpeed) {
+            mIndexDelay = 0;
             nextFrame();
         }
     }
 
     private void nextFrame() {
-        if (framesCount < sprites.size()) {
-            sprite = sprites.get(framesCount);
-            framesCount++;
-        } else framesCount = 0;
+        if (mFramesCount < mSprites.size()) {
+            mSprite = mSprites.get(mFramesCount);
+            mFramesCount++;
+        } else mFramesCount = 0;
     }
 
     public void drawingAnimation(GraphicsFW graphicsFW, int x, int y) {
-        graphicsFW.drawTexture(sprite, x, y);
+        graphicsFW.drawTexture(mSprite, x, y);
     }
 }

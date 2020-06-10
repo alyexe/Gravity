@@ -8,41 +8,45 @@ import com.github.alyexe.myframework.ObjectFW;
 import com.github.alyexe.myframework.utilites.UtilRandomFW;
 
 public class Enemy extends ObjectFW {
-    AnimationFW enemyAnimation;
+    private AnimationFW enemyAnimation;
 
     public Enemy(int maxScreenX, int maxScreenY, int minScreenY, int enemyType) {
+        init(maxScreenX, maxScreenY, minScreenY, enemyType);
+    }
 
-        this.maxScreenX = maxScreenX;
-        this.maxScreenY = maxScreenY - UtilResource.enemySprite.get(0).getHeight();
-        this.minScreenY = minScreenY;
-        this.minScreenX = 0;
-        x = maxScreenX;
-        y = UtilRandomFW.getGap(minScreenY, maxScreenY);
-        radius = UtilResource.enemySprite.get(0).getWidth() / 4f;
+    private void init(int maxScreenX, int maxScreenY, int minScreenY, int enemyType) {
+        setMaxScreenX(maxScreenX);
+        setMaxScreenY(maxScreenY - UtilResource.enemySprite.get(0).getHeight());
+        setMinScreenY(minScreenY);
+        setMinScreenX(0);
+        setX(maxScreenX);
+        setY(UtilRandomFW.getGap(minScreenY, maxScreenY));
+        setRadius(UtilResource.enemySprite.get(0).getWidth() / 4f);
         switch (enemyType) {
             case 1:
-                speed = UtilRandomFW.getGap(2, 6);
-                enemyAnimation = new AnimationFW(speed, UtilResource.enemySprite);
+                setSpeed(UtilRandomFW.getGap(2, 6));
+                enemyAnimation = new AnimationFW(getSpeed(), UtilResource.enemySprite);
                 break;
             case 2:
-                speed = UtilRandomFW.getGap(4, 9);
+                setSpeed(UtilRandomFW.getGap(4, 9));
                 break;
         }
     }
 
     public void update(double playerSpeed) {
-        x -= speed;
-        x -= playerSpeed;
-        if (x < minScreenX) {
-            x = maxScreenX;
-            y = UtilRandomFW.getGap(minScreenY, maxScreenY);
+        setX((int) (getX() - getSpeed()));
+        setX((int) (getX() - playerSpeed));
+        if (getX() < getMinScreenX()) {
+            setX(getMaxScreenX());
+            setY(UtilRandomFW.getGap(getMinScreenY(), getMaxScreenY()));
+            setSpeed(UtilRandomFW.getGap(2, 6));
         }
-        hitBox = new Rect(x, y, UtilResource.enemySprite.get(0).getWidth(), UtilResource.enemySprite.get(0).getHeight());
+        setHitBox(new Rect(getX(), getY(), UtilResource.enemySprite.get(0).getWidth(), UtilResource.enemySprite.get(0).getHeight()));
 
         enemyAnimation.runAnimation();
     }
 
     public void drawing(GraphicsFW graphicsFW) {
-        enemyAnimation.drawingAnimation(graphicsFW, x, y);
+        enemyAnimation.drawingAnimation(graphicsFW, getX(), getY());
     }
 }

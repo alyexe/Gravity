@@ -1,51 +1,41 @@
 package com.github.alyexe.myframework;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import java.util.Date;
-
-public class LoopFW extends SurfaceView implements Runnable{
+@SuppressLint("ViewConstructor")
+public class LoopFW extends SurfaceView implements Runnable {
 
     private final float FPS = 60;
     private final float SECOND = 1000000000;
     private final float UPDATE_TIME = SECOND / FPS;
-
-    private boolean running = false;
-
-    Thread gameThread = null;
-
-    CoreFW coreFW;
-    Bitmap frameBuffer;
-    SurfaceHolder surfaceHolder;
-    Canvas canvas;
-    Rect rect;
+    private final CoreFW mCoreFW;
+    private final Bitmap mFrameBuffer;
+    private final SurfaceHolder mSurfaceHolder;
+    private final Rect mRect;
+    private boolean mRunning = false;
+    private Thread mGameThread = null;
+    private Canvas mCanvas;
 
     public LoopFW(CoreFW coreFW, Bitmap frameBuffer) {
         super(coreFW);
-        this.coreFW = coreFW;
-        this.frameBuffer = frameBuffer;
-        this.surfaceHolder = getHolder();
-        this.rect = new Rect();
-        this.canvas = new Canvas();
+        mCoreFW = coreFW;
+        mFrameBuffer = frameBuffer;
+        mSurfaceHolder = getHolder();
+        mRect = new Rect();
+        mCanvas = new Canvas();
     }
-
-    //TEMP
-    float updates = 0;
-    float drawing = 0;
-    long timer = 0;
-    //TEMP
 
     @Override
     public void run() {
-        timer = System.currentTimeMillis();
         float lastTime = System.nanoTime();
         float delta = 0;
 
-        while (running) {
+        while (mRunning) {
             float nowTime = System.nanoTime();
             float elapsedTime = nowTime - lastTime;
             lastTime = nowTime;
@@ -55,49 +45,40 @@ public class LoopFW extends SurfaceView implements Runnable{
                 drawingGame();
                 delta--;
             }
-//            if (System.currentTimeMillis() - timer > 1000) {
-//                Date date = new Date();
-//                System.out.println("UPDATES = " + updates + ", DRAWS = " + drawing + " " + date.toString());
-//                updates = 0;
-//                drawing = 0;
-//                timer += 1000;
-//            }
         }
     }
 
     public void startGame() {
-        if(running) {
+        if (mRunning) {
             return;
         }
 
-        running = true;
-        gameThread = new Thread(this);
-        gameThread.start();
+        mRunning = true;
+        mGameThread = new Thread(this);
+        mGameThread.start();
     }
 
     private void updateGame() {
-        updates++;
-        coreFW.getCurrentScene().update();
+        mCoreFW.getCurrentScene().update();
     }
 
     private void drawingGame() {
-        drawing++;
-        if (surfaceHolder.getSurface().isValid()) {
-            canvas = surfaceHolder.lockCanvas();
-            canvas.getClipBounds(rect);
-            canvas.drawBitmap(frameBuffer, null, rect, null);
-            coreFW.getCurrentScene().drawing();
-            surfaceHolder.unlockCanvasAndPost(canvas);
+        if (mSurfaceHolder.getSurface().isValid()) {
+            mCanvas = mSurfaceHolder.lockCanvas();
+            mCanvas.getClipBounds(mRect);
+            mCanvas.drawBitmap(mFrameBuffer, null, mRect, null);
+            mCoreFW.getCurrentScene().drawing();
+            mSurfaceHolder.unlockCanvasAndPost(mCanvas);
         }
     }
 
     public void stopGame() {
-        if(!running) {
+        if (!mRunning) {
             return;
         }
-        running = false;
+        mRunning = false;
         try {
-            gameThread.join();
+            mGameThread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

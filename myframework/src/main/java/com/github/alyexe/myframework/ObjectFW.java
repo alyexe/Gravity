@@ -3,86 +3,86 @@ package com.github.alyexe.myframework;
 import android.graphics.Rect;
 
 public abstract class ObjectFW {
-    protected int maxScreenX;
-    protected int maxScreenY;
-    protected int minScreenX;
-    protected int minScreenY;
-    protected int x;
-    protected int y;
-    protected double speed;
+    private int mMaxScreenX;
+    private int mMaxScreenY;
+    private int mMinScreenX;
+    private int mMinScreenY;
+    private int mX;
+    private int mY;
+    private double mSpeed;
 
-    protected Rect hitBox;
-    protected double radius;
+    private Rect mHitBox;
+    private double mRadius;
 
     public int getMaxScreenX() {
-        return maxScreenX;
+        return mMaxScreenX;
     }
 
     public void setMaxScreenX(int maxScreenX) {
-        this.maxScreenX = maxScreenX;
+        this.mMaxScreenX = maxScreenX;
     }
 
     public int getMaxScreenY() {
-        return maxScreenY;
+        return mMaxScreenY;
     }
 
     public void setMaxScreenY(int maxScreenY) {
-        this.maxScreenY = maxScreenY;
+        this.mMaxScreenY = maxScreenY;
     }
 
     public int getMinScreenX() {
-        return minScreenX;
+        return mMinScreenX;
     }
 
     public void setMinScreenX(int minScreenX) {
-        this.minScreenX = minScreenX;
+        this.mMinScreenX = minScreenX;
     }
 
     public int getMinScreenY() {
-        return minScreenY;
+        return mMinScreenY;
     }
 
     public void setMinScreenY(int minScreenY) {
-        this.minScreenY = minScreenY;
+        this.mMinScreenY = minScreenY;
     }
 
     public int getX() {
-        return x;
+        return mX;
     }
 
     public void setX(int x) {
-        this.x = x;
+        this.mX = x;
     }
 
     public int getY() {
-        return y;
+        return mY;
     }
 
     public void setY(int y) {
-        this.y = y;
+        this.mY = y;
     }
 
     public double getSpeed() {
-        return speed;
+        return mSpeed;
     }
 
     public void setSpeed(double speed) {
-        this.speed = speed;
+        this.mSpeed = speed;
     }
 
     public Rect getHitBox() {
-        return hitBox;
+        return mHitBox;
     }
 
     public void setHitBox(Rect hitBox) {
-        this.hitBox = hitBox;
+        this.mHitBox = hitBox;
     }
 
     public double getRadius() {
-        return radius;
+        return mRadius;
     }
 
     public void setRadius(double radius) {
-        this.radius = radius;
+        this.mRadius = radius;
     }
 }

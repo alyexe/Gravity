@@ -9,9 +9,13 @@ import java.util.List;
 
 public class BackgroundGenerator {
 
-    List<Star> starList = new ArrayList<>();
+    private final List<Star> starList = new ArrayList<>();
 
     public BackgroundGenerator(int sceneWidth, int sceneHeight, int minScreenY) {
+        init(sceneWidth, sceneHeight, minScreenY);
+    }
+
+    private void init(int sceneWidth, int sceneHeight, int minScreenY) {
         int starsPeak = 50;
         for (int i = 0; i < starsPeak; i++) {
             Star star = new Star(sceneWidth, sceneHeight, minScreenY);

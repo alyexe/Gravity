@@ -8,6 +8,10 @@ import java.util.ArrayList;
 
 public class AssetLoader {
     public AssetLoader(CoreFW coreFW, GraphicsFW graphicsFW) {
+        init(coreFW, graphicsFW);
+    }
+
+    private void init(CoreFW coreFW, GraphicsFW graphicsFW) {
         loadTexture(graphicsFW);
         loadPlayerSprite(graphicsFW);
         loadPlayerShieldsOnSprite(graphicsFW);

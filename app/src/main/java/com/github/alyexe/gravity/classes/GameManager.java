@@ -3,7 +3,6 @@ package com.github.alyexe.gravity.classes;
 import com.github.alyexe.gravity.generators.BackgroundGenerator;
 import com.github.alyexe.gravity.generators.EnemyGenerator;
 import com.github.alyexe.gravity.generators.PowerUpGenerator;
-import com.github.alyexe.gravity.objects.Enemy;
 import com.github.alyexe.gravity.objects.Hud;
 import com.github.alyexe.gravity.objects.MainPlayer;
 import com.github.alyexe.gravity.utilites.UtilResource;
@@ -12,74 +11,66 @@ import com.github.alyexe.myframework.CoreFW;
 import com.github.alyexe.myframework.GraphicsFW;
 
 public class GameManager {
-    private int maxScreenX;
-    private int maxScreenY;
-    private int minScreenX;
-    private int minScreenY;
-    private int passedDistance;
-    private int currentPlayerSpeed;
-    private int currentPlayerShields;
-    public static boolean gameOver;
-
     public final static double ANIMATION_SPEED = 5;
-
-    MainPlayer mainPlayer;
-    BackgroundGenerator backgroundGenerator;
-    EnemyGenerator enemyGenerator;
-    PowerUpGenerator powerUpGenerator;
-    Hud hud;
-
-    public int getPassedDistance() {
-        return passedDistance;
-    }
+    public static boolean gameOver;
+    private int mPassedDistance;
+    private MainPlayer mMainPlayer;
+    private BackgroundGenerator mBackgroundGenerator;
+    private EnemyGenerator mEnemyGenerator;
+    private PowerUpGenerator mPowerUpGenerator;
+    private Hud mHud;
 
     public GameManager(CoreFW coreFW, int sceneWidth, int sceneHeight) {
-        hud = new Hud(coreFW);
-        this.maxScreenX = sceneWidth;
-        this.maxScreenY = sceneHeight;
-        this.minScreenX = 0;
-        this.minScreenY = hud.getHUD_HEIGHT();
-        this.mainPlayer = new MainPlayer(coreFW, maxScreenX, maxScreenY, minScreenY);
-        backgroundGenerator = new BackgroundGenerator(sceneWidth, sceneHeight, minScreenY);
-        enemyGenerator = new EnemyGenerator(sceneWidth, sceneHeight, minScreenY);
-        powerUpGenerator = new PowerUpGenerator(sceneWidth, sceneHeight, minScreenY);
-        gameOver = false;
+        init(coreFW, sceneWidth, sceneHeight);
+    }
 
+    private void init(CoreFW coreFW, int sceneWidth, int sceneHeight) {
+        mHud = new Hud(coreFW);
+        int minScreenY = mHud.getHudHeight();
+        mMainPlayer = new MainPlayer(coreFW, sceneWidth, sceneHeight, minScreenY);
+        mBackgroundGenerator = new BackgroundGenerator(sceneWidth, sceneHeight, minScreenY);
+        mEnemyGenerator = new EnemyGenerator(sceneWidth, sceneHeight, minScreenY);
+        mPowerUpGenerator = new PowerUpGenerator(sceneWidth, sceneHeight, minScreenY);
+        gameOver = false;
     }
 
     public void update() {
-        this.mainPlayer.update();
-        backgroundGenerator.update(mainPlayer.getPlayerSpeed());
-        enemyGenerator.update(mainPlayer.getPlayerSpeed());
-        powerUpGenerator.update(mainPlayer.getPlayerSpeed());
+        mMainPlayer.update();
+        mBackgroundGenerator.update(mMainPlayer.getSpeed());
+        mEnemyGenerator.update(mMainPlayer.getSpeed());
+        mPowerUpGenerator.update(mMainPlayer.getSpeed());
 
-        passedDistance += mainPlayer.getPlayerSpeed();
-        currentPlayerSpeed = (int)mainPlayer.getPlayerSpeed() * 60;
-        currentPlayerShields = mainPlayer.getPlayerShields();
-        hud.update(passedDistance, currentPlayerSpeed, currentPlayerShields);
+        mPassedDistance += mMainPlayer.getSpeed();
+        int currentPlayerSpeed = (int) mMainPlayer.getSpeed() * 60;
+        int currentPlayerShields = mMainPlayer.getPlayerShields();
+        mHud.update(mPassedDistance, currentPlayerSpeed, currentPlayerShields);
 
         checkHit();
     }
 
     private void checkHit() {
-        for (int i = 0; i < enemyGenerator.enemyList.size(); i++) {
-            if (CollisionDetect.isCollisionDetected(mainPlayer, enemyGenerator.enemyList.get(i))) {
+        for (int i = 0; i < mEnemyGenerator.enemyList.size(); i++) {
+            if (CollisionDetect.isCollisionDetected(mMainPlayer, mEnemyGenerator.enemyList.get(i))) {
                 UtilResource.hit.play(10);
-                mainPlayer.hitEnemy();
-                enemyGenerator.hitPlayer(enemyGenerator.enemyList.get(i));
+                mMainPlayer.hitEnemy();
+                mEnemyGenerator.hitPlayer(mEnemyGenerator.enemyList.get(i));
             }
         }
-        if (CollisionDetect.isCollisionDetected(mainPlayer, powerUpGenerator.getPowerUpShield())) {
-            mainPlayer.hitPowerUp();
-            powerUpGenerator.hitPlayer();
+        if (CollisionDetect.isCollisionDetected(mMainPlayer, mPowerUpGenerator.getPowerUpShield())) {
+            mMainPlayer.hitPowerUp();
+            mPowerUpGenerator.hitPlayer();
         }
     }
 
-    public void drawing(CoreFW coreFW, GraphicsFW graphicsFW) {
-        this.mainPlayer.drawing(graphicsFW);
-        backgroundGenerator.drawing(graphicsFW);
-        enemyGenerator.drawing(graphicsFW);
-        powerUpGenerator.drawing(graphicsFW);
-        hud.drawing(graphicsFW);
+    public void drawing(GraphicsFW graphicsFW) {
+        this.mMainPlayer.drawing(graphicsFW);
+        mBackgroundGenerator.drawing(graphicsFW);
+        mEnemyGenerator.drawing(graphicsFW);
+        mPowerUpGenerator.drawing(graphicsFW);
+        mHud.drawing(graphicsFW);
+    }
+
+    public int getPassedDistance() {
+        return mPassedDistance;
     }
 }

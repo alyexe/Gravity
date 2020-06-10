@@ -6,32 +6,30 @@ import com.github.alyexe.myframework.CoreFW;
 import com.github.alyexe.myframework.GraphicsFW;
 
 public class Hud {
-    private int passedDistance;
-    private int currentPlayerSpeed;
-    private int currentPlayerShields;
-
-    CoreFW coreFW;
-
+    private final CoreFW mCoreFW;
     private final int HUD_HEIGHT = 50;
+    private int mPassedDistance;
+    private int mCurrentPlayerSpeed;
+    private int mCurrentPlayerShields;
 
     public Hud(CoreFW coreFW) {
-        this.coreFW = coreFW;
+        mCoreFW = coreFW;
     }
 
     public void update(int passedDistance, int currentPlayerSpeed, int currentPlayerShields) {
-        this.passedDistance = passedDistance;
-        this.currentPlayerSpeed = currentPlayerSpeed;
-        this.currentPlayerShields = currentPlayerShields;
+        mPassedDistance = passedDistance;
+        mCurrentPlayerSpeed = currentPlayerSpeed;
+        mCurrentPlayerShields = currentPlayerShields;
     }
 
     public void drawing(GraphicsFW graphicsFW) {
         graphicsFW.drawLine(0, HUD_HEIGHT, graphicsFW.getWidthFrameBuffer(), HUD_HEIGHT, Color.WHITE);
-        graphicsFW.drawText(coreFW.getString(R.string.txt_hud_passedDistance) + ":" + passedDistance, 10, 30, Color.GREEN, 25, null);
-        graphicsFW.drawText(coreFW.getString(R.string.txt_hud_currentPlayerSpeed) + ":" + currentPlayerSpeed, 350, 30, Color.GREEN, 25, null);
-        graphicsFW.drawText(coreFW.getString(R.string.txt_hud_currentPlayerShields) + ":" + currentPlayerShields, 650, 30, Color.GREEN, 25, null);
+        graphicsFW.drawText(mCoreFW.getString(R.string.txt_hud_passedDistance) + ":" + mPassedDistance, 10, 30, Color.GREEN, 25, null);
+        graphicsFW.drawText(mCoreFW.getString(R.string.txt_hud_currentPlayerSpeed) + ":" + mCurrentPlayerSpeed, 350, 30, Color.GREEN, 25, null);
+        graphicsFW.drawText(mCoreFW.getString(R.string.txt_hud_currentPlayerShields) + ":" + mCurrentPlayerShields, 650, 30, Color.GREEN, 25, null);
     }
 
-    public int getHUD_HEIGHT() {
+    public int getHudHeight() {
         return HUD_HEIGHT;
     }
 }

@@ -7,24 +7,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EnemyGenerator {
-    private final int maxScreenX;
-    private final int maxScreenY;
-    private final int minScreenX;
-    private final int minScreenY;
-
     public List<Enemy> enemyList;
+    private int mMaxScreenX;
+    private int mMaxScreenY;
+    private int mMinScreenY;
 
     public EnemyGenerator(int sceneWidth, int sceneHeight, int minScreenY) {
-        this.maxScreenX = sceneWidth;
-        this.maxScreenY = sceneHeight;
-        this.minScreenX = 0;
-        this.minScreenY = minScreenY;
+        init(sceneWidth, sceneHeight, minScreenY);
+    }
+
+    private void init(int sceneWidth, int sceneHeight, int minScreenY) {
+        mMaxScreenX = sceneWidth;
+        mMaxScreenY = sceneHeight;
+        mMinScreenY = minScreenY;
         enemyList = new ArrayList<>();
     }
 
     public void update(double playerSpeed) {
         if (enemyList.size() < 3) {
-            addEnemy(playerSpeed, 3);
+            addEnemy(1);
         }
         for (Enemy e : enemyList) {
             e.update(playerSpeed);
@@ -37,9 +38,9 @@ public class EnemyGenerator {
         }
     }
 
-    private void addEnemy(double playerSpeed, int enemiesAmount) {
+    private void addEnemy(int enemiesAmount) {
         while (enemiesAmount > 0) {
-            enemyList.add(new Enemy(maxScreenX, maxScreenY, minScreenY, 1));
+            enemyList.add(new Enemy(mMaxScreenX, mMaxScreenY, mMinScreenY, 1));
             enemiesAmount--;
         }
     }

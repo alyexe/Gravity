@@ -6,29 +6,25 @@ import com.github.alyexe.myframework.utilites.UtilRandomFW;
 public class Star extends ObjectFW {
 
     public Star(int sceneWidth, int sceneHeight, int minScreenY) {
-        this.maxScreenX = sceneWidth;
-        this.maxScreenY = sceneHeight;
-        this.minScreenX = 0;
-        this.minScreenY = minScreenY;
-        this.speed = 4;
-        this.x = UtilRandomFW.getCasualNumber(maxScreenX);
-        this.y = UtilRandomFW.getGap(this.minScreenY, maxScreenY);
+        init(sceneWidth, sceneHeight, minScreenY);
+    }
+
+    private void init(int sceneWidth, int sceneHeight, int minScreenY) {
+        setMaxScreenX(sceneWidth);
+        setMaxScreenY(sceneHeight);
+        setMinScreenX(0);
+        setMinScreenY(minScreenY);
+        setSpeed(4);
+        setX(UtilRandomFW.getCasualNumber(getMaxScreenX()));
+        setY(UtilRandomFW.getGap(getMinScreenY(), getMaxScreenY()));
     }
 
     public void update(double playerSpeed) {
-        x -= playerSpeed;
-        x -= speed;
-        if (x < 0) {
-            x = maxScreenX;
-            y = UtilRandomFW.getGap(minScreenY, maxScreenY);
+        setX((int) (getX() - playerSpeed));
+        setX((int) (getX() - getSpeed()));
+        if (getX() < 0) {
+            setX(getMaxScreenX());
+            setY(UtilRandomFW.getGap(getMinScreenY(), getMaxScreenY()));
         }
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
     }
 }

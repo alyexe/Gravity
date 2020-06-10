@@ -2,50 +2,51 @@ package com.github.alyexe.gravity.generators;
 
 import com.github.alyexe.gravity.objects.PowerUpShield;
 import com.github.alyexe.myframework.GraphicsFW;
-import com.github.alyexe.myframework.utilites.UtilRandomFW;
 import com.github.alyexe.myframework.utilites.UtilTimerDelay;
 
 public class PowerUpGenerator {
-    private final int maxScreenX;
-    private final int maxScreenY;
-    private final int minScreenX;
-    private final int minScreenY;
+    private int mMaxScreenX;
+    private int mMaxScreenY;
+    private int mMinScreenY;
 
-    UtilTimerDelay powerUpTimer;
-    PowerUpShield powerUpShield;
+    private UtilTimerDelay mPowerUpTimer;
+    private PowerUpShield mPowerUpShield;
 
     public PowerUpGenerator(int sceneWidth, int sceneHeight, int minScreenY) {
-        this.maxScreenX = sceneWidth;
-        this.maxScreenY = sceneHeight;
-        this.minScreenX = 0;
-        this.minScreenY = minScreenY;
-        powerUpShield = new PowerUpShield(maxScreenX, maxScreenY, minScreenY);
-        powerUpTimer = new UtilTimerDelay();
-        powerUpTimer.startTimer();
+        init(sceneWidth, sceneHeight, minScreenY);
+    }
+
+    private void init(int sceneWidth, int sceneHeight, int minScreenY) {
+        mMaxScreenX = sceneWidth;
+        mMaxScreenY = sceneHeight;
+        mMinScreenY = minScreenY;
+        mPowerUpShield = new PowerUpShield(mMaxScreenX, mMaxScreenY, minScreenY);
+        mPowerUpTimer = new UtilTimerDelay();
+        mPowerUpTimer.startTimer();
     }
 
     public void drawing(GraphicsFW graphicsFW) {
-        powerUpShield.drawing(graphicsFW);
+        mPowerUpShield.drawing(graphicsFW);
     }
 
     public void update(double playerSpeed) {
-        if (powerUpTimer.timerDelay(UtilRandomFW.getGap(5, 20))) {
-            powerUpShield.update(playerSpeed);
-            if (powerUpShield.getX() < 0) {
-                powerUpShield = null;
-                powerUpShield = new PowerUpShield(maxScreenX, maxScreenY, minScreenY);
-                powerUpTimer.startTimer();
+        if (mPowerUpTimer.timerDelay(5)) {
+            mPowerUpShield.update(playerSpeed);
+            if (mPowerUpShield.getX() < 0) {
+                mPowerUpShield = null;
+                mPowerUpShield = new PowerUpShield(mMaxScreenX, mMaxScreenY, mMinScreenY);
+                mPowerUpTimer.startTimer();
             }
         }
     }
 
-    public PowerUpShield getPowerUpShield() {
-        return this.powerUpShield;
+    public void hitPlayer() {
+        mPowerUpShield = null;
+        mPowerUpShield = new PowerUpShield(mMaxScreenX, mMaxScreenY, mMinScreenY);
+        mPowerUpTimer.startTimer();
     }
 
-    public void hitPlayer() {
-        powerUpShield = null;
-        powerUpShield = new PowerUpShield(maxScreenX, maxScreenY, minScreenY);
-        powerUpTimer.startTimer();
+    public PowerUpShield getPowerUpShield() {
+        return this.mPowerUpShield;
     }
 }

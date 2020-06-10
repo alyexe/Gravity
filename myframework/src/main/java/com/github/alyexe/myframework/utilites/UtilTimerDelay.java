@@ -1,19 +1,16 @@
 package com.github.alyexe.myframework.utilites;
 
 public class UtilTimerDelay {
-    final double SECOND = 1000000000;
-    double startTime;
-    double currentTime;
-    double elapsedTime;
+    private final double SECOND = 1000000000;
+    private double mStartTime;
 
     public void startTimer() {
-        startTime = System.nanoTime() / SECOND;
+        mStartTime = System.nanoTime() / SECOND;
     }
 
     public boolean timerDelay(double seconds) {
-        currentTime = System.nanoTime() / SECOND;
-        elapsedTime = currentTime - startTime;
-        if (elapsedTime > seconds) return true;
-        return false;
+        double mCurrentTime = System.nanoTime() / SECOND;
+        double mElapsedTime = mCurrentTime - mStartTime;
+        return mElapsedTime > seconds;
     }
 }
