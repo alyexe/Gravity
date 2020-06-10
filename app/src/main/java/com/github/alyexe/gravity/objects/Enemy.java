@@ -18,7 +18,7 @@ public class Enemy extends ObjectFW {
         this.minScreenX = 0;
         x = maxScreenX;
         y = UtilRandomFW.getGap(minScreenY, maxScreenY);
-        radius = UtilResource.enemySprite.get(0).getWidth()/4;
+        radius = UtilResource.enemySprite.get(0).getWidth() / 4f;
         switch (enemyType) {
             case 1:
                 speed = UtilRandomFW.getGap(2, 6);

@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EnemyGenerator {
-    private int maxScreenX;
-    private int maxScreenY;
-    private int minScreenX;
-    private int minScreenY;
+    private final int maxScreenX;
+    private final int maxScreenY;
+    private final int minScreenX;
+    private final int minScreenY;
 
     public List<Enemy> enemyList;
 

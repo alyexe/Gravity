@@ -9,10 +9,39 @@ import java.util.ArrayList;
 public class AssetLoader {
     public AssetLoader(CoreFW coreFW, GraphicsFW graphicsFW) {
         loadTexture(graphicsFW);
-        loadSpriteLayer(graphicsFW);
+        loadPlayerSprite(graphicsFW);
+        loadPlayerShieldsOnSprite(graphicsFW);
         loadEnemySprite(graphicsFW);
         loadOther(graphicsFW);
         loadAudio(coreFW);
+        loadPowerUps(graphicsFW);
+    }
+
+    private void loadPowerUps(GraphicsFW graphicsFW) {
+        UtilResource.PowerUpShieldSprite = new ArrayList<>();
+
+        int count = 8;
+        UtilResource.PowerUpShieldSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 32, 192, 32, 32));
+        UtilResource.PowerUpShieldSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 32, 192, 32, 32));
+        UtilResource.PowerUpShieldSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 32, 192, 32, 32));
+        UtilResource.PowerUpShieldSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count * 32, 192, 32, 32));
+    }
+
+    private void loadPlayerShieldsOnSprite(GraphicsFW graphicsFW) {
+        UtilResource.playerShieldsOnSprite = new ArrayList<>();
+        UtilResource.playerBoostShieldsOnSprite = new ArrayList<>();
+
+        int count = 0;
+        UtilResource.playerShieldsOnSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 128, 64, 64));
+        UtilResource.playerShieldsOnSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 128, 64, 64));
+        UtilResource.playerShieldsOnSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 128, 64, 64));
+        UtilResource.playerShieldsOnSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count * 64, 128, 64, 64));
+
+        count = 0;
+        UtilResource.playerBoostShieldsOnSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 192, 64, 64));
+        UtilResource.playerBoostShieldsOnSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 192, 64, 64));
+        UtilResource.playerBoostShieldsOnSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 192, 64, 64));
+        UtilResource.playerBoostShieldsOnSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count * 64, 192, 64, 64));
     }
 
     private void loadAudio(CoreFW coreFW) {
@@ -34,10 +63,10 @@ public class AssetLoader {
         UtilResource.enemySprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 0, 64, 64));
         UtilResource.enemySprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 0, 64, 64));
         UtilResource.enemySprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 0, 64, 64));
-        UtilResource.enemySprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 0, 64, 64));
+        UtilResource.enemySprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count * 64, 0, 64, 64));
     }
 
-    private void loadSpriteLayer(GraphicsFW graphicsFW) {
+    private void loadPlayerSprite(GraphicsFW graphicsFW) {
         UtilResource.playerSprite = new ArrayList<>();
         UtilResource.playerBoostSprite = new ArrayList<>();
         UtilResource.playerExplodeSprite = new ArrayList<>();
@@ -47,21 +76,21 @@ public class AssetLoader {
         UtilResource.playerSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 0, 64, 64));
         UtilResource.playerSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 0, 64, 64));
         UtilResource.playerSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 0, 64, 64));
-        UtilResource.playerSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 0, 64, 64));
+        UtilResource.playerSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count * 64, 0, 64, 64));
 
         //Boosted rocket
         count = 0;
         UtilResource.playerBoostSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 64, 64, 64));
         UtilResource.playerBoostSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 64, 64, 64));
         UtilResource.playerBoostSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 64, 64, 64));
-        UtilResource.playerBoostSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 64, 64, 64));
+        UtilResource.playerBoostSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count * 64, 64, 64, 64));
 
         //Explode rocket
         count = 4;
         UtilResource.playerExplodeSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 4 * 64, 64, 64));
         UtilResource.playerExplodeSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 4 * 64, 64, 64));
         UtilResource.playerExplodeSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 4 * 64, 64, 64));
-        UtilResource.playerExplodeSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count++ * 64, 4 * 64, 64, 64));
+        UtilResource.playerExplodeSprite.add(graphicsFW.newSprite(UtilResource.textureAtlas, count * 64, 4 * 64, 64, 64));
     }
 
     private void loadTexture(GraphicsFW graphicsFW) {
